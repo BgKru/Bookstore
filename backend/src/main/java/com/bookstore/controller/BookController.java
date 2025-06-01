@@ -1,7 +1,7 @@
-package com.bookstore.controller;
+package main.java.com.bookstore.controller;
 
-import com.bookstore.model.Book;
-import com.bookstore.service.BookService;
+import main.java.com.bookstore.model.Book;
+import main.java.com.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

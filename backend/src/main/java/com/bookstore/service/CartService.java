@@ -1,11 +1,12 @@
-package com.bookstore.service;
+package main.java.com.bookstore.service;
 
-import com.bookstore.model.Book;
-import com.bookstore.model.Cart;
-import com.bookstore.model.CartItem;
-import com.bookstore.repository.BookRepository;
-import com.bookstore.repository.CartItemRepository;
-import com.bookstore.repository.CartRepository;
+import main.java.com.bookstore.model.Book;
+import main.java.com.bookstore.model.User;
+import main.java.com.bookstore.model.Cart;
+import main.java.com.bookstore.model.CartItem;
+import main.java.com.bookstore.repository.BookRepository;
+import main.java.com.bookstore.repository.CartItemRepository;
+import main.java.com.bookstore.repository.CartRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,14 @@ public class CartService {
     public Cart getCart(Long userId) {
         return cartRepository.findByUserId(userId)
                 .orElseGet(() -> createNewCart(userId));
+    }
+
+    private Cart createNewCart(Long userId) {
+        Cart newCart = new Cart();
+        User user = new User();
+        user.setId(userId);
+        newCart.setUser(user);
+        return cartRepository.save(newCart);
     }
 
     @Transactional
@@ -83,11 +92,5 @@ public class CartService {
         cart.getItems().clear();
         cart.setTotalPrice(BigDecimal.ZERO);
         cartRepository.save(cart);
-    }
-
-    private Cart createNewCart(Long userId) {
-        Cart newCart = new Cart();
-        newCart.setUser(new User(userId)); // Если есть User
-        return cartRepository.save(newCart);
     }
 }

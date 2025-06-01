@@ -1,7 +1,7 @@
-package com.bookstore.service;
+package main.java.com.bookstore.service;
 
-import com.bookstore.model.Book;
-import com.bookstore.repository.BookRepository;
+import main.java.com.bookstore.model.Book;
+import main.java.com.bookstore.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.bookstore.repository;
+package main.java.com.bookstore.repository;
 
-import com.bookstore.model.Book;
+import main.java.com.bookstore.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

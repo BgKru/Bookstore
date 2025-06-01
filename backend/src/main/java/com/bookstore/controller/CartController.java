@@ -1,7 +1,7 @@
-package com.bookstore.controller;
+package main.java.com.bookstore.controller;
 
-import com.bookstore.model.Cart;
-import com.bookstore.service.CartService;
+import main.java.com.bookstore.model.Cart;
+import main.java.com.bookstore.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
