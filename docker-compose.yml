@@ -3,12 +3,14 @@ version: '3.8'
 services:
   backend:
     build: ./backend
-    container_name: bookstore-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bookstore_db
+      SPRING_DATASOURCE_USERNAME: bookstore_user
+      SPRING_DATASOURCE_PASSWORD: Awdxzqetgvcfr
     ports:
       - "8080:8080"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:h2:mem:bookstore
-      - SPRING_H2_CONSOLE_ENABLED=true
+    depends_on:
+      - postgres
     networks:
       - bookstore-network
 
