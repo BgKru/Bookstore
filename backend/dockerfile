@@ -1,0 +1,26 @@
+# Stage 1: Сборка
+FROM maven:3.8.5-openjdk-17 AS build
+WORKDIR /app
+
+# Копируем только необходимые файлы
+COPY pom.xml .
+COPY backend/src/main/java backend/src/main/java
+
+RUN ls -la /app
+
+# Собираем проект внутри контейнера
+RUN mvn clean package -DskipTests
+
+# Stage 2: Финальный образ
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+
+# Копируем JAR из стадии сборки
+COPY --from=build /app/target/bookstore-0.0.1-SNAPSHOT.jar app.jar
+
+# Для отладки (можно удалить после проверки)
+RUN ls -la /app
+
+EXPOSE 8080
+CMD ["sh", "-c", "java -jar app.jar || sleep infinity"]
+#ENTRYPOINT ["java", "-jar", "app.jar"]

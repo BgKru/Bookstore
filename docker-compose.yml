@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bookstore_db
+      SPRING_DATASOURCE_USERNAME: bookstore_user
+      SPRING_DATASOURCE_PASSWORD: Awdxzqetgvcfr
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - bookstore-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/app  # Для разработки (опционально)
+      - /app/node_modules  # Исключаем перезапись node_modules
+    depends_on:
+      - backend
+    networks:
+      - bookstore-network
+  postgres:
+    image: postgres:15-alpine
+    container_name: bookstore_postgres
+    environment:
+      POSTGRES_DB: bookstore_db
+      POSTGRES_USER: bookstore_user
+      POSTGRES_PASSWORD: Awdxzqetgvcfr
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/src/main/resources/db/migration:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bookstore_user -d bookstore_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  bookstore-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
