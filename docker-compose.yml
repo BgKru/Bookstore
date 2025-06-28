@@ -5,15 +5,15 @@ services:
     build:
       context: .
       dockerfile: backend/dockerfile
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bookstore_db
-      SPRING_DATASOURCE_USERNAME: bookstore_user
-      SPRING_DATASOURCE_PASSWORD: Awdxzqetgvcfr
-    ports:
-      - "8080:8080"
     depends_on:
       postgres:
         condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bookstore_db
+      SPRING_DATASOURCE_USERNAME: bookstore_user
+      SPRING_DATASOURCE_PASSWORD: securepassword
+    ports:
+      - "8080:8080"
     networks:
       - bookstore-network
 
@@ -32,21 +32,19 @@ services:
       - bookstore-network
   postgres:
     image: postgres:15-alpine
-    container_name: bookstore_postgres
     environment:
       POSTGRES_DB: bookstore_db
       POSTGRES_USER: bookstore_user
-      POSTGRES_PASSWORD: Awdxzqetgvcfr
+      POSTGRES_PASSWORD: securepassword
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./backend/src/main/resources/db/migration:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U bookstore_user -d bookstore_db"]
       interval: 5s
       timeout: 5s
-      retries: 5
+      retries: 10
 
 networks:
   bookstore-network:
