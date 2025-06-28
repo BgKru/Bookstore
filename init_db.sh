@@ -3,8 +3,8 @@
 # Параметры подключения
 DB_NAME="bookstore_db"
 DB_USER="bookstore_user"
-DB_PASSWORD="Awdxzqetgvcfr1!"
-DB_HOST="localhost"
+DB_PASSWORD="securepassword"
+DB_HOST="postgres"
 DB_PORT="5432"
 
 # Создаем базу данных и пользователя
