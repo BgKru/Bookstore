@@ -4,7 +4,7 @@ INSERT INTO users (username, email, password) VALUES
 ('jane_smith', 'jane@example.com', '$2a$10$yHw...');
 
 -- Добавление тестовых книг
-INSERT INTO books (title, author, description, price, cover_image) VALUES
+INSERT INTO book (title, author, description, price, cover_image) VALUES
 ('Clean Code', 'Robert C. Martin', 'A handbook of agile software craftsmanship', 35.99, '/images/clean_code.jpg'),
 ('Design Patterns', 'Erich Gamma', 'Elements of reusable object-oriented software', 42.50, '/images/design_patterns.jpg');
 

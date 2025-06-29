@@ -6,6 +6,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY backend/src/main/java backend/src/main/java
 
+
 RUN ls -la /app
 
 # Собираем проект внутри контейнера
@@ -22,6 +23,7 @@ COPY --from=build /app/target/bookstore-0.0.1-SNAPSHOT.jar app.jar
 # Копируем wait-for-it.sh и entrypoint.sh
 COPY backend/wait-for-it.sh /app/wait-for-it.sh
 COPY backend/entrypoint.sh /app/entrypoint.sh
+COPY backend/src/main/resources backend/src/main/resources
 
 # Делаем скрипт исполняемым
 RUN chmod +x /app/wait-for-it.sh /app/entrypoint.sh && \
