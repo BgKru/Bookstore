@@ -91,6 +91,17 @@
 
     <build>
 	    <sourceDirectory>${project.basedir}/backend/src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/backend/src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.sql</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
            <!-- Компилятор Java -->
             <plugin>

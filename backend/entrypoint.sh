@@ -1,8 +1,7 @@
 #!/bin/sh
-set -e
 
-# Ждём Postgres
-/app/wait-for-it.sh postgres:5432
+# Ожидаем доступности PostgreSQL
+/app/wait-for-it.sh postgres:5432 --timeout=30 --strict -- echo "PostgreSQL is up"
 
-# Запуск Java-приложения
-java -jar /app/app.jar
+# Запускаем приложение
+exec java -jar /app/app.jar
