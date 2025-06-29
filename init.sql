@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS cart_items (
 );
 
 -- Создание индексов для ускорения запросов
-CREATE INDEX IF NOT EXISTS idx_books_title ON books(title);
-CREATE INDEX IF NOT EXISTS idx_books_author ON books(author);
+CREATE INDEX IF NOT EXISTS idx_books_title ON book(title);
+CREATE INDEX IF NOT EXISTS idx_books_author ON book(author);
 CREATE INDEX IF NOT EXISTS idx_carts_user_id ON carts(user_id);
 CREATE INDEX IF NOT EXISTS idx_cart_items_cart_id ON cart_items(cart_id);
 
@@ -55,7 +55,7 @@ INSERT INTO users (username, email, password) VALUES
 ('jane_smith', 'jane@example.com', 'securepass');
 
 -- Вставка книг
-INSERT INTO books (title, author, description, price, cover_image) VALUES
+INSERT INTO book (title, author, description, price, cover_image) VALUES
 ('The Great Gatsby', 'F. Scott Fitzgerald', 'A story about the American Dream', 9.99, 'gatsby.jpg'),
 ('1984', 'George Orwell', 'Dystopian novel about surveillance society', 12.99, '1984.jpg'),
 ('To Kill a Mockingbird', 'Harper Lee', 'Classic novel on racial injustice', 8.99, 'mockingbird.jpg');

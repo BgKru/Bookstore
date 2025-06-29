@@ -35,16 +35,13 @@ CREATE TABLE IF NOT EXISTS cart_items (
     cart_id BIGINT NOT NULL REFERENCES carts(id) ON DELETE CASCADE,
     book_id BIGINT NOT NULL REFERENCES book(id),
     quantity INTEGER NOT NULL DEFAULT 1,
-    subtotal DECIMAL(10, 2) GENERATED ALWAYS AS (
-        (SELECT price FROM book WHERE id = book_id) * quantity
-    ) STORED,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(cart_id, book_id)
 );
 
 -- Создание индексов для ускорения запросов
-CREATE INDEX IF NOT EXISTS idx_books_title ON books(title);
-CREATE INDEX IF NOT EXISTS idx_books_author ON books(author);
+CREATE INDEX IF NOT EXISTS idx_books_title ON book(title);
+CREATE INDEX IF NOT EXISTS idx_books_author ON book(author);
 CREATE INDEX IF NOT EXISTS idx_carts_user_id ON carts(user_id);
 CREATE INDEX IF NOT EXISTS idx_cart_items_cart_id ON cart_items(cart_id);
