@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS cart_items (
 );
 
 -- Создание индексов для ускорения запросов
-CREATE INDEX IF NOT EXISTS idx_books_title ON books(title);
-CREATE INDEX IF NOT EXISTS idx_books_author ON books(author);
+CREATE INDEX IF NOT EXISTS idx_books_title ON book(title);
+CREATE INDEX IF NOT EXISTS idx_books_author ON book(author);
 CREATE INDEX IF NOT EXISTS idx_carts_user_id ON carts(user_id);
 CREATE INDEX IF NOT EXISTS idx_cart_items_cart_id ON cart_items(cart_id);
