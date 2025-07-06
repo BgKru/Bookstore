@@ -6,7 +6,24 @@ WORKDIR /app
 COPY ./frontend/package*.json ./frontend/.babelrc ./
 
 # Устанавливаем зависимости
+RUN npm create vite@latest bookstore-frontend --template react
+CMD cd bookstore-frontend
 RUN npm install
+
+RUN npm install --save-dev \
+      tailwindcss \
+      postcss \
+      autoprefixer \
+      style-loader \
+      css-loader \
+      webpack \
+      webpack-cli \
+      babel-loader \
+      @babel/core \
+      @babel/preset-env \
+      @babel/preset-react \
+      react-router-dom
+#RUN npx tailwindcss init -p
 
 # Копируем исходники
 COPY ./frontend .

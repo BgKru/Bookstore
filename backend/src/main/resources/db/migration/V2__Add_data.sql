@@ -1,17 +1,17 @@
--- Добавление тестовых пользователей
-INSERT INTO users (username, email, password) VALUES
-('john_doe', 'john@example.com', '$2a$10$xJw...'),
-('jane_smith', 'jane@example.com', '$2a$10$yHw...');
+-- Вставляем категории
+INSERT INTO categories (name) VALUES
+('Фантастика'),
+('Роман'),
+('Научная литература'),
+('Приключения');
 
--- Добавление тестовых книг
-INSERT INTO book (title, author, description, price, cover_image) VALUES
-('Clean Code', 'Robert C. Martin', 'A handbook of agile software craftsmanship', 35.99, '/images/clean_code.jpg'),
-('Design Patterns', 'Erich Gamma', 'Elements of reusable object-oriented software', 42.50, '/images/design_patterns.jpg');
+-- Вставляем книги
+INSERT INTO books (title, author, description, price, cover_image_url, category_id) VALUES
+('Война и мир', 'Лев Толстой', 'Эпический роман о войне 1812 года', 499.00, 'https://example.com/images/war_and_peace.jpg ', 2),
+('Мастер и Маргарита', 'Михаил Булгаков', 'Философский роман с элементами сатиры', 399.00, 'https://example.com/images/master_and_margarita.jpg ', 2),
+('Андроиды мечтают о электроовцах?', 'Филип К. Дик', 'Фантастический детектив о будущем', 599.00, 'https://example.com/images/androids_dream.jpg ', 1),
+('Программируем на Java', 'Брюс Эккель', 'Классическое пособие по Java', 799.00, 'https://example.com/images/java_book.jpg ', 3);
 
--- Создание корзин для пользователей
-INSERT INTO carts (user_id) VALUES (1), (2);
-
--- Добавление книг в корзину первого пользователя
-INSERT INTO cart_items (cart_id, book_id, quantity) VALUES
-(1, 1, 2),
-(1, 2, 1);
+-- Вставляем пользователя
+INSERT INTO users (username, password, email) VALUES
+('user1', '$2a$10$eRCdOfpSHzRwZqBkX8uOTEoGxvFjLlP7yYhNvDnOQZbWzJmK7HcTm', 'user1@example.com');

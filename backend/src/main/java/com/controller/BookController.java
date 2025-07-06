@@ -1,32 +1,34 @@
-package com.bookstore.controller;
+package com.controller;
 
-import com.bookstore.model.Book;
-import com.bookstore.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.model.Book;
+import com.repository.BookRepository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/books")
+@CrossOrigin(origins = "http://localhost:3000") // Пока заглушка для фронтенда
 public class BookController {
-    private final BookService bookService;
 
-    @Autowired
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
+    private final BookRepository bookRepository;
+
+    public BookController(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
     @GetMapping
     public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
+        return bookRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Book getBookById(@PathVariable Long id) {
-        return bookService.getBookById(id);
+        return bookRepository.findById(id).orElseThrow();
+    }
+
+    @PostMapping
+    public Book createBook(@RequestBody Book book) {
+        return bookRepository.save(book);
     }
 }

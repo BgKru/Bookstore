@@ -1,4 +1,4 @@
-package com.bookstore.config;
+package com.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;

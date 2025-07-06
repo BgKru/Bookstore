@@ -1,49 +1,37 @@
-package com.bookstore.controller;
+package com.controller;
 
-import com.bookstore.model.Cart;
-import com.bookstore.service.CartService;
-import lombok.RequiredArgsConstructor;
+import com.model.CartItem;
+import com.service.CartService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/cart")
-@RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class CartController {
+
     private final CartService cartService;
 
-    @GetMapping
-    public Cart getCart(@RequestParam Long userId) {
-        return cartService.getCart(userId);
+    public CartController(CartService cartService) {
+        this.cartService = cartService;
     }
 
-    @PostMapping("/add")
-    public Cart addToCart(
-            @RequestParam Long userId,
-            @RequestParam Long bookId,
-            @RequestParam(defaultValue = "1") int quantity
-    ) {
+    @GetMapping("/{userId}")
+    public List<CartItem> getCart(@PathVariable Long userId) {
+        return cartService.getCartItemsForUser(userId);
+    }
+
+    @PostMapping("/{userId}/add")
+    public CartItem addToCart(@PathVariable Long userId,
+                              @RequestParam Long bookId,
+                              @RequestParam int quantity) {
         return cartService.addToCart(userId, bookId, quantity);
     }
 
-    @PostMapping("/remove")
-    public Cart removeFromCart(
-            @RequestParam Long userId,
-            @RequestParam Long bookId
-    ) {
-        return cartService.removeFromCart(userId, bookId);
-    }
-
-    @PostMapping("/update")
-    public Cart updateQuantity(
-            @RequestParam Long userId,
-            @RequestParam Long bookId,
-            @RequestParam int quantity
-    ) {
-        return cartService.updateQuantity(userId, bookId, quantity);
-    }
-
-    @PostMapping("/clear")
-    public void clearCart(@RequestParam Long userId) {
-        cartService.clearCart(userId);
+    @DeleteMapping("/{userId}/remove")
+    public void removeFromCart(@PathVariable Long userId,
+                               @RequestParam Long bookId) {
+        cartService.removeFromCart(userId, bookId);
     }
 }

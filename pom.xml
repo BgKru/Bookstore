@@ -120,7 +120,7 @@
             <version>3.5.0</version>
             <configuration>
                 <!-- Укажите ваш главный класс -->
-                <mainClass>com.bookstore.BookstoreApplication</mainClass>
+                <mainClass>com.BookstoreApplication</mainClass>
 	        </configuration>
             <executions>
                 <execution>

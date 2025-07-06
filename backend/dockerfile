@@ -21,16 +21,17 @@ WORKDIR /app
 # Копируем JAR из стадии сборки
 COPY --from=build /app/target/bookstore-0.0.1-SNAPSHOT.jar app.jar
 
-COPY backend/wait-for-it.sh /app/wait-for-it.sh
-COPY backend/entrypoint.sh /app/entrypoint.sh
+#COPY backend/wait-for-it.sh /app/wait-for-it.sh
+#COPY backend/entrypoint.sh /app/entrypoint.sh
 
 # Делаем скрипт исполняемым
-RUN chmod +x /app/wait-for-it.sh /app/entrypoint.sh && \
-    apt-get update && \
-    apt-get install -y netcat && \
-    rm -rf /var/lib/apt/lists/*
+#RUN chmod +x /app/wait-for-it.sh /app/entrypoint.sh && \
+#    apt-get update && \
+#    apt-get install -y netcat && \
+#    rm -rf /var/lib/apt/lists/*
 
 EXPOSE 8080
-ENTRYPOINT ["/app/entrypoint.sh"]
+#ENTRYPOINT ["/app/entrypoint.sh"]
+#CMD ["ls", "-la", "/app"]
 #CMD ["sh", "-c", "java -jar app.jar || sleep infinity"]
-#ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
