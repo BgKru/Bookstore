@@ -4,7 +4,7 @@ services:
   backend:
     build:
       context: .
-      dockerfile: backend/dockerfile
+      dockerfile: backend/Dockerfile
     depends_on:
       postgres:
         condition: service_healthy
@@ -20,9 +20,9 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: frontend/dockerfile
+      dockerfile: frontend/Dockerfile
     ports:
-      - "80:80"
+      - "3000:3000"
     volumes:
       - ./frontend:/app  # Для разработки (опционально)
       - /app/node_modules  # Исключаем перезапись node_modules
@@ -30,6 +30,20 @@ services:
       - backend
     networks:
       - bookstore-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: bookstore-proxy
+    ports:
+      - "8081:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - bookstore-network
+
   postgres:
     image: postgres:15-alpine
     environment:

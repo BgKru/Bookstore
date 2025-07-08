@@ -1,5 +1,5 @@
-// webpack.config.js
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -10,17 +10,28 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/i,
-        loader: 'babel-loader',
+        test: /\.js$/,
         exclude: /node_modules/,
+        use: ['babel-loader'],
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
   },
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }),
+  ],
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false
+      }
+    }
+  }
 };
