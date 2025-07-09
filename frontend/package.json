@@ -1,11 +1,10 @@
 {
   "name": "bookstore-frontend",
-  "proxy": "http://localhost:3000",
   "version": "1.0.0",
   "scripts": {
     "build": "webpack --mode production",
     "build-css": "npx tailwindcss -i ./src/index.css -o ./dist/static/css/main.css --minify",
-    "start": "webpack serve --mode development --open"
+    "start": "webpack serve --mode development"
   },
   "dependencies": {
     "react": "^18.2.0",

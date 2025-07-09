@@ -1,12 +1,10 @@
 # Шаг 1: Установка зависимостей и сборка
-FROM node:18 as build
+FROM node:18 AS build
 WORKDIR /app
 
 # Копируем package.json и конфиги
 COPY frontend/package*.json ./frontend/.babelrc ./
 COPY frontend/webpack.config.js ./
-
-RUN npm install
 
 # Устанавливаем зависимости
 RUN npm install --save-dev \
