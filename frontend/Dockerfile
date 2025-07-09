@@ -7,20 +7,21 @@ COPY frontend/package*.json ./frontend/.babelrc ./
 COPY frontend/webpack.config.js ./
 
 # Устанавливаем зависимости
-RUN npm install --save-dev \
-      tailwindcss \
-      postcss \
-      autoprefixer \
-      style-loader \
-      css-loader \
-      postcss-loader \
-      webpack \
-      webpack-cli \
-      babel-loader \
-      @babel/core \
-      @babel/preset-env \
-      @babel/preset-react \
-      react-router-dom
+RUN m install --save-dev \
+    tailwindcss \
+    postcss \
+    autoprefixer \
+    style-loader \
+    css-loader \
+    postcss-loader \
+    webpack \
+    webpack-cli \
+    babel-loader \
+    @babel/core \
+    @babel/preset-env \
+    @babel/preset-react \
+    react-router-dom \
+    framer-motion
 
 # Копируем исходный код
 COPY frontend/src ./src
